@@ -1,0 +1,11 @@
+{
+  "extensions": {
+    "enabled": {}
+  },
+  "duplicate_strategy": {
+    "default_strategy": {
+      "strategy": "FAIL"
+    },
+    "mods": {}
+  }
+}

@@ -9,7 +9,10 @@
 /fabric/.gradle/
 /fabric/build/
 /fabric/build/classes/java/main/
+/fabric/runs/
 /forge/build/
 /forge/build/sourcesSets/main/
+/forge/runs/
 /neoforge/build/
 /neoforge/build/classes/java/main/
+/neoforge/runs/

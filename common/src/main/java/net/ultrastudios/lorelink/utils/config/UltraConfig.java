@@ -2,6 +2,7 @@ package net.ultrastudios.lorelink.utils.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import net.ultrastudios.lorelink.Constants;
 
 import java.io.IOException;
@@ -56,6 +57,10 @@ public class UltraConfig<T> {
         catch (IOException e) {
             Constants.LOG.error(e.getMessage());
             buffer = defaultConfig;
+        }
+        catch (JsonSyntaxException e) {
+            buffer = defaultConfig;
+            save(defaultConfig);
         }
     }
 

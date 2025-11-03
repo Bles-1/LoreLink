@@ -1,11 +1,14 @@
 package net.ultrastudios.lorelink.modsconfig.shr;
 
+import net.minecraft.world.InteractionResult;
 import net.ultrastudios.lorelink.Constants;
 import net.ultrastudios.lorelink.SUPPORTED_MODS;
 import net.ultrastudios.lorelink.internal.config.Config;
 import net.ultrastudios.lorelink.internal.config.duplicatestrategy.DuplicateStrategy;
 import net.ultrastudios.lorelink.internal.config.duplicatestrategy.DuplicateStrategyConfig;
 import net.ultrastudios.lorelink.internal.config.duplicatestrategy.Strategy;
+import net.ultrastudios.lorelink.utils.actioncontext.blockusecontext.ClientBlockUseContext;
+import net.ultrastudios.lorelink.utils.actioncontext.blockusecontext.ServerBlockUseContext;
 import net.ultrastudios.lorelink.utils.config.UltraConfigManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,9 +30,11 @@ public class Integrations {
             return customActionHandlerFactory.apply(defaultHandler);
         if (!combinedActionHandlerFactories.isEmpty())
             return assemble(defaultHandler, combinedActionHandlerFactories);
+
         //
         //  Future mods auto-configuration logic.
         //
+
         return defaultHandler;
     }
 
@@ -70,6 +75,8 @@ public class Integrations {
                     }
                 }
             }
+
+            case Strategy.NONE -> {}
         }
     }
 

@@ -90,7 +90,7 @@ public interface IActionHandler {
     @NotNull InteractionResult doCharge(int pPower, @NotNull ServerBlockUseContext context);
 
     /**
-     * <p>Action method that unbans player. works on the same principle as {@link IActionHandler#doRespawn(ServerBlockUseContext)} but is executed when ReSpawnerUnbanning option is enabled.</p>
+     * <p>Action method that unbans player. works on the same principle as {@link IActionHandler#doRespawn(ServerBlockUseContext)} but is executed when ReSpawnerUnbanning gamerule is enabled.</p>
      * <p>This method contains all unbanning logic, including mechanical effects. {@link IActionHandler#respawnEffect(ServerBlockUseContext)} or {@link IActionHandler#respawnFailedEffect(ServerBlockUseContext)} is executed after this method.</p>
      * @param context {@link ServerBlockUseContext}
      * @return {@link InteractionResult} indicating success.
@@ -137,7 +137,7 @@ public interface IActionHandler {
     void easterEggEffect(@NotNull ServerBlockUseContext context);
 
     /**
-     * Particles method. Will be executed by ReSpawner after {@link IActionHandler#respawnEffect(ServerBlockUseContext)}
+     * Particles method. Will be executed by ReSpawner after {@link IActionHandler#respawnEffect(ServerBlockUseContext)} if `STANDARD` particle type is chose in config.
      * @param context {@link ServerBlockUseContext}
      */
     void respawnParticlesEffect(@NotNull ServerBlockUseContext context);

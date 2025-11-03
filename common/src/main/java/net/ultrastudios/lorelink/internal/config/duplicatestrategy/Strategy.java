@@ -8,7 +8,8 @@ public enum Strategy implements IFallbackEnum<Strategy> {
     FIRST,
     LAST,
     ONLY,
-    COMBINE;
+    COMBINE,
+    NONE;
 
     @Override
     public Strategy getFallback() {

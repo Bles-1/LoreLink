@@ -5,7 +5,5 @@ import org.jetbrains.annotations.NotNull;
 
 public class Config {
     @NotNull
-    public Extensions extensions = new Extensions();
-    @NotNull
     public DuplicateStrategyConfig duplicate_strategy = new DuplicateStrategyConfig();
 }

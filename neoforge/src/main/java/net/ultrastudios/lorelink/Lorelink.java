@@ -3,11 +3,12 @@ package net.ultrastudios.lorelink;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.ultrastudios.lorelink.platform.NeoForgePlatformHelper;
 
 @Mod(Constants.MOD_ID)
 public class Lorelink {
 
     public Lorelink(IEventBus eventBus) {
-        CommonClass.init();
+        CommonClass.init(new NeoForgePlatformHelper(Constants.MOD_ID));
     }
 }

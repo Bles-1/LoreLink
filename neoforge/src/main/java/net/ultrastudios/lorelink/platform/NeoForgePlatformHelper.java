@@ -23,7 +23,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
-import net.ultrastudios.lorelink.platform.services.IPlatformHelper;
+import net.ultrastudios.lorelink.utils.platform.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.Nullable;

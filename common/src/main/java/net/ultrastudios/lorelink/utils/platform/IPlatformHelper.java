@@ -1,4 +1,4 @@
-package net.ultrastudios.lorelink.platform.services;
+package net.ultrastudios.lorelink.utils.platform;
 
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.chat.Component;
@@ -9,12 +9,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public interface IPlatformHelper {
@@ -24,7 +22,7 @@ public interface IPlatformHelper {
     // -----------------------------------------------------
 
     /**
-     * Returns the name of the current platform (e.g. "forge", "neoforge", "fabric").
+     * Returns the name of the current platform.
      *
      * @return the platform name
      */
@@ -34,15 +32,14 @@ public interface IPlatformHelper {
      * Checks whether a mod with the given namespace is loaded.
      *
      * @param modId the namespace (mod id) to check
-     * @return true if the mod is loaded, false otherwise
+     * @return true if the mod is loaded, otherwise false
      */
     boolean isModLoaded(String modId);
 
     /**
-     * Returns whether the game is running in a development environment.
-     * This typically depends on the loader implementation.
+     * Checks whether the game is running in a development environment.
      *
-     * @return true if running in a development environment, false otherwise
+     * @return true if running in a development environment, otherwise false
      */
     boolean isDevelopmentEnvironment();
 
@@ -63,8 +60,8 @@ public interface IPlatformHelper {
     /**
      * Registers a new block.
      *
-     * @param id    block identifier (path only; namespace assumed to be your mod id)
-     * @param block supplier creating the block instance
+     * @param id    block identifier (without namespace)
+     * @param block the block factory
      * @param <T>   block class type
      * @return a supplier returning the registered block
      */
@@ -73,8 +70,8 @@ public interface IPlatformHelper {
     /**
      * Registers a new item.
      *
-     * @param id    item identifier (path only; namespace assumed to be your mod id)
-     * @param item  supplier creating the item instance
+     * @param id    item identifier (without namespace)
+     * @param item  the item factory
      * @param <T>   item class type
      * @return a supplier returning the registered item
      */
@@ -109,15 +106,22 @@ public interface IPlatformHelper {
             int defaultValue
     );
 
+    /**
+     * Registers a new creative mode inventory tab.
+     * @param id    tab identifier (without namespace)
+     * @param title visible tittle of tab
+     * @param icon  visible icon of tab
+     * @return the created creative tab
+     */
     CreativeModeTab registerCreativeTab(String id, Component title, Supplier<ItemStack> icon);
 
     /**
      * Registers a new entity type.
      *
-     * @param id       entity identifier (path only)
-     * @param builder  a prepared EntityType.Builder instance
+     * @param id       entity identifier (without namespace)
+     * @param builder  an EntityType.Builder instance
      * @param <T>      entity class type
-     * @return the registered EntityType
+     * @return the registered EntityType supplier
      */
     <T extends Entity> Supplier<EntityType<T>> registerEntity(
             String id,
@@ -127,9 +131,9 @@ public interface IPlatformHelper {
     /**
      * Registers a new particle type.
      *
-     * @param id        identifier (path only)
-     * @param factory   the codec or factory used to create the particle type
-     * @return the registered ParticleType
+     * @param id        identifier (without namespace)
+     * @param factory   the particle type factory
+     * @return the registered ParticleType supplier
      */
     Supplier<ParticleType<?>> registerParticle(
             String id,
@@ -141,7 +145,6 @@ public interface IPlatformHelper {
     //  PATHS / DIRECTORIES
     // -----------------------------------------------------
 
-
     /**
      * Returns the directory where the game/server instance is located.
      * On clients, this is usually the .minecraft folder.
@@ -151,14 +154,14 @@ public interface IPlatformHelper {
     Path getGameDir();
 
     /**
-     * Returns the directory used for storing configuration files.
+     * Returns the directory for configuration files.
      *
      * @return the config directory
      */
     Path getConfigDir();
 
     /**
-     * Returns the currently running dedicated or integrated server instance.
+     * Returns the currently running server instance.
      *
      * @return current server, or null if no server is running
      */
@@ -170,21 +173,21 @@ public interface IPlatformHelper {
     // -----------------------------------------------------
 
     /**
-     * Executes the given task on the logical client thread.
+     * Executes the given task client-side.
      *
      * @param task code to run on client
      */
     void runOnClient(Runnable task);
 
     /**
-     * Executes the given task on the logical server thread.
+     * Executes the given task server-side.
      *
      * @param task code to run on server
      */
     void runOnServer(Runnable task);
 
     /**
-     * Schedules a task to run on the next tick (server or client depending on context).
+     * Schedules a task to run on the next tick
      *
      * @param task task to execute next tick
      */

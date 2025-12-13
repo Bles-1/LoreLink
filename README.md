@@ -43,7 +43,7 @@ Lore Link provides:
 ---
 
 ### 🔗 Links
-- <img height="14" src="https://cdn.simpleicons.org/discord" width="14"/> <a href="https://discord.gg/e2SE62WT6x">Join our Discord</a>
+- <img height="14" src="https://cdn.simpleicons.org/discord" width="14" alt="discord"/> <a href="https://discord.gg/e2SE62WT6x">Join our Discord</a>
 - ❓ [Common Errors](./docs/problems.md)
 - 📂️ [GitHub Repository](https://github.com/Bles-1/LoreLink)
 - ⚙️ [Extensions Guide](./docs/extensions.md)

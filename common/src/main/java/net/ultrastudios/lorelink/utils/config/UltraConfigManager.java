@@ -10,7 +10,7 @@ public class UltraConfigManager {
     private static final HashMap<String, UltraConfig<?>> configs = new HashMap<>();
 
     public static <T> void register(String modID, @NotNull Path configDir, Class<T> tClass, T defaultConfig) {
-        configs.put(modID, new UltraConfig<T>(tClass, configDir
+        configs.put(modID, new UltraConfig<>(tClass, configDir
                 .resolve("ultraconfig")
                 .resolve(modID + ".json"),defaultConfig));
         configs.get(modID).load();

@@ -22,7 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
-import net.ultrastudios.lorelink.platform.services.IPlatformHelper;
+import net.ultrastudios.lorelink.utils.platform.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Supplier;
 
-public class FabricPlatformHelper implements IPlatformHelper {
+    public class FabricPlatformHelper implements IPlatformHelper {
 
     private final String MOD_ID;
     private final Queue<Runnable> nextTickTasks = new ConcurrentLinkedQueue<>();

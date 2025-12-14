@@ -23,6 +23,8 @@ Package: `net.ultrastudios.lorelink.utils.platform`
 ### Usage:
 You can ger factory from `PlatformHelper#FACTORY`, and then run `IPlatformHelperFactory#get(String modID, Logger logger)` to get new object.
 
+List of IPlatformHelper methods:
+
 | Method                                                                                                                          | Description                                                                                                         | Parameters                                                                                                        | Returns                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
 | `String getPlatformName()`                                                                                                      | Returns the name of the current platform.                                                                           | —                                                                                                                 | the platform name                                             |

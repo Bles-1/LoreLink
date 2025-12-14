@@ -62,4 +62,4 @@ or CurseMaven
 (https://www.curseforge.com/minecraft/mc-mods/lore-link).
 
 ### Usage
-👉 See [full guide](./docs/helpers).
+👉 See [full guide](./docs/helpers.md).

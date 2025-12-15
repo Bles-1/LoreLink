@@ -7,5 +7,6 @@ public class Lorelink {
 
     public Lorelink() {
         CommonClass.init();
+
     }
 }

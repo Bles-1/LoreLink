@@ -17,10 +17,9 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.DeferredRegister;
@@ -56,16 +55,14 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
         private static final Queue<DelayedTask> delayed = new ArrayDeque<>();
 
-        @SubscribeEvent
-        public static void onServerTick(TickEvent.ServerTickEvent event) {
-            if (event.phase != TickEvent.Phase.END) return;
+        private ForgeScheduler() {}
 
-            // --- Next tick tasks ---
+        @SubscribeEvent
+        public static void onServerTick(TickEvent.ServerTickEvent.Post event) {
             while (!nextTick.isEmpty()) {
                 nextTick.poll().run();
             }
 
-            // --- Delayed tasks ---
             delayed.removeIf(d -> {
                 d.ticks--;
                 if (d.ticks <= 0) {
@@ -107,11 +104,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
         PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     }
 
-    public void register(IEventBus bus) {
-        BLOCKS.register(bus);
-        ITEMS.register(bus);
-        ENTITIES.register(bus);
-        PARTICLES.register(bus);
+    public void register(FMLJavaModLoadingContext context) {
+        BLOCKS.register(context.getModBusGroup());
+        ITEMS.register(context.getModBusGroup());
+        ENTITIES.register(context.getModBusGroup());
+        PARTICLES.register(context.getModBusGroup());
     }
 
     @Override
@@ -186,7 +183,9 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public void runOnClient(Runnable task) {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> task::run);
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT) {
+            task.run();
+        }
     }
 
     @Override

@@ -118,7 +118,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isDevelopmentEnvironment() {
-        return !FMLLoader.isProduction();
+        return !FMLLoader.getCurrent().isProduction();
     }
 
     @Override
@@ -178,7 +178,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public void runOnClient(Runnable task) {
-        if (net.neoforged.fml.loading.FMLLoader.getDist().isClient()) {
+        if (net.neoforged.fml.loading.FMLLoader.getCurrent().getDist().isClient()) {
             task.run();
         }
     }
@@ -200,11 +200,11 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isClient() {
-        return FMLEnvironment.dist == Dist.CLIENT;
+        return FMLEnvironment.getDist() == Dist.CLIENT;
     }
 
     @Override
     public boolean isServer() {
-        return FMLEnvironment.dist == Dist.DEDICATED_SERVER;
+        return FMLEnvironment.getDist() == Dist.DEDICATED_SERVER;
     }
 }
